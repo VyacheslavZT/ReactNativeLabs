@@ -6,7 +6,14 @@ import GalleryScreen from "./gallery";
 import ProfileScreen from "./profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+import { TabBarIndicator } from "react-native-tab-view";
+import {
+  IconHome,
+  IconPhoto,
+  IconUser,
+  TablerIcon,
+  TablerIconsProps,
+} from "tabler-icons-react-native";
 //MaterialTopTabNavigator чомусь не працює в IOS симуляторі
 const Tab =
   Platform.OS == "ios"
@@ -14,6 +21,10 @@ const Tab =
     : createMaterialTopTabNavigator();
 
 export default function TabLayout() {
+  function IconGallery(props: TablerIconsProps): Element {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <View
@@ -36,18 +47,83 @@ export default function TabLayout() {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: "#777",
-          tabBarInactiveTintColor: "#ccc",
+          tabBarShowLabel: false,
           tabBarStyle: { backgroundColor: "#eee" },
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Gallery" component={GalleryScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }: any) => (
+              <FocusableIcon name="Home" icon={IconHome} focused={focused} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Gallery"
+          component={GalleryScreen}
+          options={{
+            tabBarIcon: ({ focused }: any) => (
+              <FocusableIcon
+                name="Gallery"
+                icon={IconPhoto}
+                focused={focused}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarIcon: ({ focused }: any) => (
+              <FocusableIcon name="Profile" icon={IconUser} focused={focused} />
+            ),
+          }}
+        />
       </Tab.Navigator>
-      <View style={{ flexDirection: "row", justifyContent:'center' }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginBottom: useSafeAreaInsets().bottom,
+        }}
+      >
         <Text>Вандалович В`ячеслав ІПЗ-23-3</Text>
       </View>
     </>
+  );
+}
+
+interface IFocusableIconProps {
+  icon: TablerIcon;
+  focused: boolean;
+  name: string;
+}
+
+export function FocusableIcon(props: IFocusableIconProps) {
+  const itemsColor = props.focused ? "#666" : "#aaa";
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        margin: -8,
+        alignItems: "center",
+        justifyContent: "flex-end",
+      }}
+    >
+      <props.icon size={25} {...props} color={itemsColor} />
+      <Text
+        style={{
+          fontWeight: "bold",
+          fontSize: 10,
+          color: itemsColor,
+        }}
+      >
+        {props.name}
+      </Text>
+    </View>
   );
 }
