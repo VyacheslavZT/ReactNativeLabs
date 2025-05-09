@@ -173,64 +173,79 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={{ backgroundColor: colors.background, flex: 1 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          height: 50,
-          alignItems: "center",
-          margin: 10,
-        }}
-      >
-        <IconBrandSteam size={40} color={colors.symbolUnimportant} stroke={1} />
-        <Text
-          style={{
-            color: colors.symbolUnimportant,
-            fontSize: 40,
-            fontWeight: "200",
-          }}
-        >
-          Chat
-        </Text>
-      </View>
-      <View style={{ margin: 10 }}>
-        <View
-          style={{
-            backgroundColor: colors.backgroundFocus,
-            borderRadius: 8,
-            height: 30,
-            flexDirection: "row",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              backgroundColor: colors.background,
-              margin: 2,
-              borderRadius: 6,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: colors.symbolImportant }}>Open chats</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              margin: 2,
-              borderRadius: 6,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ color: colors.symbolUnimportant }}>Open chats</Text>
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={chatEntries}
-          renderItem={(i) => <ChatEntry key={i.index} {...i.item} />}
-          contentContainerStyle={{ paddingBottom:90, paddingRight: 10 }}
-        ></FlatList>
-      </View>
+      <FlatList
+        data={[null, ...chatEntries]}
+        renderItem={(i) =>
+          i.item ? (
+            <ChatEntry key={i.index} {...i.item} />
+          ) : (
+            <>
+              <View
+                style={{
+                  flexDirection: "row",
+                  height: 50,
+                  alignItems: "center",
+                  margin: 10,
+                }}
+              >
+                <IconBrandSteam
+                  size={40}
+                  color={colors.symbolUnimportant}
+                  stroke={1}
+                />
+                <Text
+                  style={{
+                    color: colors.symbolUnimportant,
+                    fontSize: 40,
+                    fontWeight: "200",
+                  }}
+                >
+                  Chat
+                </Text>
+              </View>
+              <View style={{ margin: 10 }}>
+                <View
+                  style={{
+                    backgroundColor: colors.backgroundFocus,
+                    borderRadius: 8,
+                    height: 30,
+                    flexDirection: "row",
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{
+                      flex: 1,
+                      backgroundColor: colors.background,
+                      margin: 2,
+                      borderRadius: 6,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={{ color: colors.symbolImportant }}>
+                      Open chats
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      flex: 1,
+                      margin: 2,
+                      borderRadius: 6,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={{ color: colors.symbolUnimportant }}>
+                      Open chats
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </>
+          )
+        }
+        contentContainerStyle={{ paddingRight: 10 }}
+      ></FlatList>
     </SafeAreaView>
   );
 }
@@ -252,6 +267,7 @@ function ChatEntry(data: IChatEntryProps): JSX.Element {
         padding: 1,
         alignItems: "center",
         marginVertical: 6,
+        marginHorizontal: 10,
       }}
     >
       <Image
