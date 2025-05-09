@@ -1,45 +1,67 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { View } from 'react-native';
+import { IconMessageCircle, IconShield, IconShoppingBag, IconUser } from 'tabler-icons-react-native';
+import { useColors } from '@/hooks/useThemeColor';
+import HomeScreen from '.';
+import ExploreScreen from './explore';
+import ChatScreen from './chat';
+import SecurityScreen from './security';
+import ProfileScreen from './profile';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+const Tab = createBottomTabNavigator();
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colors = useColors();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: colors.tabIconSelected,
+          tabBarInactiveTintColor: colors.tabIconDefault,
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarStyle: { backgroundColor: colors.tabBackground },
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tab.Screen
+          name="Index"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ color }) => <IconShoppingBag size={28} color={color} />, 
+          }}
+        />
+        <Tab.Screen
+          name="Explore"
+          component={ExploreScreen}
+          options={{
+            tabBarIcon: ({ color }) => <IconUser size={28} color={color} />, 
+          }}
+        />
+        <Tab.Screen
+          name="Chat"
+          component={ChatScreen}
+          options={{
+            tabBarIcon: ({ color }) => <IconMessageCircle size={28} color={color} />, 
+          }}
+        />
+        <Tab.Screen
+          name="Security"
+          component={SecurityScreen}
+          options={{
+            tabBarIcon: ({ color }) => <IconShield size={28} color={color} />, 
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <View style={{ width: 28, height: 28, borderRadius: 100, backgroundColor: color }} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
   );
 }
