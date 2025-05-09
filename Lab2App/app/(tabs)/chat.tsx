@@ -258,7 +258,7 @@ function ChatEntry(data: IChatEntryProps): JSX.Element {
         src={data.url}
         style={{
           aspectRatio: 1,
-          backgroundColor: "red",
+          backgroundColor: colors.backgroundFocus,
           height: 60,
           marginRight: 10,
           borderRadius: 1000,
