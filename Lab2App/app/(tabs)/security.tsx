@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { IconBrandSteam } from "tabler-icons-react-native";
+import { IconBrandSteam, IconChevronRight } from "tabler-icons-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function SecurityScreen() {
@@ -110,20 +110,48 @@ export default function SecurityScreen() {
             </View>
           </View>
         </LinearGradient>
-        <View style={{margin: 18, gap: 20}}>
-          <Text style={{fontSize: 20,color: colors.symbolImportant}}>
+        <View style={{ margin: 18, gap: 20 }}>
+          <Text style={{ fontSize: 20, color: colors.symbolImportant }}>
             You’ll enter your code each time you enter your password to sign in
             to your Steam account.
           </Text>
-          <Text style={{fontSize: 18,color: colors.focus}}>
-          Tip: If you don't share your PC, you can select "Remember my
+          <Text style={{ fontSize: 18, color: colors.focus }}>
+            Tip: If you don't share your PC, you can select "Remember my
             password" when you sign in to the PC client to enter your password
             and authenticator code less often.
           </Text>
-          <View style={{width:"100%", borderRadius:8, gap: 3, overflow:"hidden"}}>
-            <TouchableOpacity style={{backgroundColor:colors.backgroundFocus, padding: 15}}><Text style={{color: colors.symbolImportant, fontSize: 20}}>Remove Authenticator</Text></TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor:colors.backgroundFocus, padding: 15}}><Text style={{color: colors.symbolImportant, fontSize: 20}}>My Recovery Code</Text></TouchableOpacity>
-            <TouchableOpacity style={{backgroundColor:colors.backgroundFocus, padding: 15}}><Text style={{color: colors.symbolImportant, fontSize: 20}}>Help</Text></TouchableOpacity>
+          <View
+            style={{
+              width: "100%",
+              borderRadius: 8,
+              gap: 3,
+              overflow: "hidden",
+            }}
+          >
+            {["Remove Authenticator", "My Recovery Code", "Help"].map(
+              (e, i) => {
+                return (
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: colors.backgroundFocus,
+                      padding: 15,
+                      flexDirection: "row",
+                    }}
+                    key={i}
+                  >
+                    <Text
+                      style={{ color: colors.symbolImportant, fontSize: 20 }}
+                    >
+                      {e}
+                    </Text>
+                    <View style={{ flex: 1 }}></View>
+                    <IconChevronRight
+                      color={colors.symbolUnimportant}
+                    ></IconChevronRight>
+                  </TouchableOpacity>
+                );
+              }
+            )}
           </View>
         </View>
       </View>
