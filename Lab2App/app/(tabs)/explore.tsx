@@ -9,7 +9,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { IconBrandSteam, IconSearch } from "tabler-icons-react-native";
+import {
+  IconBrandSteam,
+  IconMessage,
+  IconSearch,
+  IconShare2,
+  IconThumbUp,
+} from "tabler-icons-react-native";
 
 export default function ExploreScreen() {
   const colors = useColors();
@@ -251,7 +257,18 @@ function Post(data: IPostProps): JSX.Element {
             height: 2,
           }}
         />
-        <View></View>
+        <View style={{ flexDirection: "row", alignItems: "center", padding:10 }}>
+          <IconThumbUp stroke={1.8} color="lime" />
+          <Text style={{ fontSize: 18, color: "lime", marginRight: 30 }}>
+            {data.likeCount}
+          </Text>
+          <IconMessage stroke={1.8} color={colors.symbolUnimportant} />
+          <Text style={{ fontSize: 18, color: colors.symbolUnimportant }}>
+            {data.commentCount}
+          </Text>
+          <View style={{ flex: 1 }} />
+          <IconShare2 stroke={1.8} color={colors.symbolUnimportant} />
+        </View>
       </View>
     </>
   );
