@@ -257,9 +257,11 @@ function Post(data: IPostProps): JSX.Element {
             height: 2,
           }}
         />
-        <View style={{ flexDirection: "row", alignItems: "center", padding:10 }}>
-          <IconThumbUp stroke={1.8} color="lime" />
-          <Text style={{ fontSize: 18, color: "lime", marginRight: 30 }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", padding: 10 }}
+        >
+          <IconThumbUp stroke={1.8} color="green" />
+          <Text style={{ fontSize: 18, color: "green", marginRight: 30 }}>
             {data.likeCount}
           </Text>
           <IconMessage stroke={1.8} color={colors.symbolUnimportant} />

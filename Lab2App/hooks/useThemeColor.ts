@@ -20,7 +20,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 //   }
 // }
 
-export function useColors()  {
+export function useColors() {
   const theme = useColorScheme() ?? "light";
-  return Colors.dark;
+  return theme == "light" ? Colors.light : Colors.dark;
 }

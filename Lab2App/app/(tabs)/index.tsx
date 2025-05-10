@@ -218,7 +218,7 @@ function BigGame(props: Game): JSX.Element {
       ></LinearGradient>
       <View style={{ flex: 1 }} />
       <View style={{ margin: 16 }}>
-        <Text style={{ fontSize: 20, color: colors.symbolImportant }}>
+        <Text style={{ fontSize: 20, color: "white" }}>
           {props.name}
         </Text>
         <Text style={{ fontSize: 15, color: colors.symbolUnimportant }}>
