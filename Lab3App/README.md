@@ -11,4 +11,5 @@ yarn
 yarn android
 ```
 
-<video src="demo.mp4" width=300>
+<a href="https://github.com/VyacheslavZT/ReactNativeLabs/blob/main/Lab3App/demo.mp4">Демонстрація</a>
+<video src="https://github.com/VyacheslavZT/ReactNativeLabs/blob/main/Lab3App/demo.mp4" width=300>
