@@ -2,3 +2,4 @@
 
 [Лабораторна робота №1](Lab1App/README.md)
 [Лабораторна робота №2](Lab2App/README.md)
+[Лабораторна робота №3](Lab3App/README.md)
